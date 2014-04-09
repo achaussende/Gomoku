@@ -1,6 +1,8 @@
 
 package GomoKu.PlateauJeu2D;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -31,6 +33,11 @@ public abstract class JeuDePlateau2D {
             }
         }
         return null;
+    }
+    
+    public ArrayList<Coup> getSituation() {
+        ArrayList<Coup> histo = new ArrayList<>(this.getPlateau().getHistorique().clone());
+        return histo;
     }
 
     public void setPlateau(Plateau plateau) {
