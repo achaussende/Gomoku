@@ -44,12 +44,12 @@ public class Plateau {
         }
     }
 
-    public void jouer(Coup coup) throws ExceptionPlateauJeu2D {
+    public void jouer(Coup coup){
         try{
             etatPlateau[coup.getPos().getX()][coup.getPos().getX()] = coup.getId();
             historique.add(coup); }
         catch (ArrayIndexOutOfBoundsException e){
-            throw (new ExceptionPlateauJeu2D("Plateau.jouer en dehors du plateau"));
+            System.out.println("Plateau.jouer en dehors du plateau");
         }
     }
 

@@ -1,8 +1,6 @@
 
 package GomoKu.PlateauJeu2D;
 
-import GomoKu.Joueur;
-
 /**
  *
  * @author Antoine
@@ -12,6 +10,10 @@ public abstract class JeuDePlateau2D {
     private Joueur[] joueurs;
     private Joueur joueurSuivant;
     private Plateau plateau;
+
+    public Plateau getPlateau() {
+        return plateau;
+    }
 
     public Joueur getJoueurSuivant() {
         return joueurSuivant;
@@ -30,6 +32,6 @@ public abstract class JeuDePlateau2D {
     }
     
     public abstract boolean partieTerminee();
-    public abstract boolean coupValide();
+    public abstract boolean coupValide(Coup c);
     public abstract Joueur jouerPartie();
 }
