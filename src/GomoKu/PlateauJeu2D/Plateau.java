@@ -5,7 +5,6 @@ package GomoKu.PlateauJeu2D;/*
  */
 
 
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
@@ -35,7 +34,8 @@ public class Plateau {
         this.longueur = longueur;
         this.largeur = largeur;
         this.etatPlateau = new int[longueur][largeur];
-        this.historique = new ArrayDeque<Coup>() {};
+        this.historique = new ArrayDeque<Coup>() {
+        };
     }
 
     public void initialiser(ArrayDeque<Coup> liste_coup) throws ExceptionPlateauJeu2D {
@@ -44,22 +44,22 @@ public class Plateau {
         }
     }
 
-    public void jouer(Coup coup){
-        try{
+    public void jouer(Coup coup) {
+        try {
             etatPlateau[coup.getPos().getX()][coup.getPos().getX()] = coup.getId();
-            historique.add(coup); }
-        catch (ArrayIndexOutOfBoundsException e){
+            historique.add(coup);
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Plateau.jouer en dehors du plateau");
         }
     }
 
     public ArrayList<Position> etatId(int id) {
         ArrayList<Position> l = new ArrayList<Position>();
-        for (Coup c: historique) {
+        for (Coup c : historique) {
             if (c.getId() == id) {
-              l.add(new Position(c.getPos().getX(), c.getPos().getY()));
+                l.add(new Position(c.getPos().getX(), c.getPos().getY()));
             }
-            
+
         }
         return l;
     }
@@ -67,12 +67,13 @@ public class Plateau {
     public String toString(boolean complet) {
         StringBuilder sb = new StringBuilder();
         sb.append("Plateau : \n");
-        if(complet)
-        { sb.append("Longueur = ");
-        sb.append(longueur);
-        sb.append("\nLargeur = ");
-        sb.append(largeur);
-        sb.append("\nEtat du plateau :\n");}
+        if (complet) {
+            sb.append("Longueur = ");
+            sb.append(longueur);
+            sb.append("\nLargeur = ");
+            sb.append(largeur);
+            sb.append("\nEtat du plateau :\n");
+        }
         for (int i = 0; i < longueur; i++) {
             sb.append("[ ");
             for (int j = 0; j < largeur; j++) {
@@ -84,16 +85,20 @@ public class Plateau {
         }
         return sb.toString();
     }
-    
+
     public void annuler() {
         this.historique.remove();
     }
 
-    public int getIdPosition(Position p)throws ExceptionPlateauJeu2D{
-        try{
+    public int getIdPosition(Position p) throws ExceptionPlateauJeu2D {
+        try {
             return etatPlateau[p.getX()][p.getY()];
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw (new ExceptionPlateauJeu2D("Tentative d'accès à une case en dehors du tableau"));
         }
+    }
+
+    public int getDernierId() {
+        return this.historique.getLast().getId();
     }
 }
