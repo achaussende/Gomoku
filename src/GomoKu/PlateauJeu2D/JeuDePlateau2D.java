@@ -1,6 +1,7 @@
 
 package GomoKu.PlateauJeu2D;
 
+
 /**
  *
  * @author Antoine
@@ -16,7 +17,20 @@ public abstract class JeuDePlateau2D {
     }
 
     public Joueur getJoueurSuivant() {
-        return joueurSuivant;
+        if(joueurSuivant==null){
+            return joueurs[0];
+        }else{
+            for(int i=0;i<joueurs.length;i++){
+                if(joueurs[i].equals(joueurSuivant)){
+                    if(i==joueurs.length-1){
+                        return joueurs[0];
+                    }else{
+                        return joueurs[i];
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public void setPlateau(Plateau plateau) {
