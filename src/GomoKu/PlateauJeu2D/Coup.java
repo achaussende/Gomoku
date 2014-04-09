@@ -1,6 +1,6 @@
-package GomoKu;
+package GomoKu.PlateauJeu2D;
 
-import GomoKu.Position;
+import GomoKu.PlateauJeu2D.Position;
 
 /**
  *

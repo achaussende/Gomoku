@@ -1,4 +1,10 @@
-package GomoKu;/*
+package GomoKu;
+
+import GomoKu.PlateauJeu2D.ExceptionPlateauJeu2D;
+import GomoKu.PlateauJeu2D.Position;
+import GomoKu.PlateauJeu2D.Plateau;
+
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -18,7 +24,7 @@ public class PlateauGomoku extends Plateau {
         super(longueur, largeur);
     }
 
-    public boolean checkLigneId(Position pos,int id,int n) throws ExceptionGomoku {
+    public boolean checkLigneId(Position pos,int id,int n) throws ExceptionPlateauJeu2D {
         int m=0;
         for (int i=0;i<this.getLargeur();i++){
             if(id == getIdPosition(new Position(i, pos.getY()))){
@@ -33,7 +39,7 @@ public class PlateauGomoku extends Plateau {
         else{ return false;}
     }
 
-    public boolean checkColonneId(Position pos,int id,int n) throws ExceptionGomoku {
+    public boolean checkColonneId(Position pos,int id,int n) throws ExceptionPlateauJeu2D {
         int m=0;
         for (int i=0;i<this.getLongueur();i++){
             if(id == getIdPosition(new Position(pos.getY(),i))){

@@ -1,4 +1,4 @@
-package GomoKu;
+package GomoKu.PlateauJeu2D;
 
 /**
  *

@@ -1,8 +1,10 @@
-package GomoKu;/*
+package GomoKu.PlateauJeu2D;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -36,18 +38,18 @@ public class Plateau {
         this.historique = new ArrayDeque<Coup>() {};
     }
 
-    public void initialiser(ArrayDeque<Coup> liste_coup) throws ExceptionGomoku {
+    public void initialiser(ArrayDeque<Coup> liste_coup) throws ExceptionPlateauJeu2D {
         for (Coup c : liste_coup) {
             this.jouer(c);
         }
     }
 
-    public void jouer(Coup coup) throws ExceptionGomoku {
+    public void jouer(Coup coup) throws ExceptionPlateauJeu2D {
         try{
             etatPlateau[coup.getPos().getX()][coup.getPos().getX()] = coup.getId();
             historique.add(coup); }
         catch (ArrayIndexOutOfBoundsException e){
-            throw (new ExceptionGomoku("Plateau.jouer en dehors du plateau"));
+            throw (new ExceptionPlateauJeu2D("Plateau.jouer en dehors du plateau"));
         }
     }
 
@@ -62,7 +64,7 @@ public class Plateau {
         return l;
     }
 
-    protected String toString(boolean complet) {
+    public String toString(boolean complet) {
         StringBuilder sb = new StringBuilder();
         sb.append("Plateau : \n");
         if(complet)
@@ -87,11 +89,11 @@ public class Plateau {
         this.historique.remove();
     }
 
-    public int getIdPosition(Position p)throws ExceptionGomoku{
+    public int getIdPosition(Position p)throws ExceptionPlateauJeu2D{
         try{
             return etatPlateau[p.getX()][p.getY()];
         }catch (ArrayIndexOutOfBoundsException e){
-            throw (new ExceptionGomoku("Tentative d'accès à une case en dehors du tableau"));
+            throw (new ExceptionPlateauJeu2D("Tentative d'accès à une case en dehors du tableau"));
         }
     }
 }
