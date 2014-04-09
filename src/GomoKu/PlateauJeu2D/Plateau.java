@@ -27,6 +27,10 @@ public class Plateau {
         return largeur;
     }
 
+    public ArrayDeque<Coup> getHistorique() {
+        return historique;
+    }
+
     public Plateau() {
     }
 
