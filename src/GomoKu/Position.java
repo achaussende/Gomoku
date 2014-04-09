@@ -2,7 +2,7 @@ package GomoKu;
 
 /**
  *
- * @author Adrien CHAUSSENDE p1105501
+ * @author Adrien CHAUSSENDE
  */
 public class Position {
 
