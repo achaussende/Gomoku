@@ -1,5 +1,6 @@
 package GomoKu;
 
+import GomoKu.JeuDeGomoku.PlateauGomoku;
 import GomoKu.PlateauJeu2D.Position;
 import GomoKu.PlateauJeu2D.JoueurAleatoire;
 import GomoKu.PlateauJeu2D.ExceptionPlateauJeu2D;
