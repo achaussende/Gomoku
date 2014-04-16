@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Adrien
+ * @author Adrien CHAUSSENDE
  */
 public class JeuDeGomokuToriqueFactory implements JeuDePlateauFactory {
 
@@ -73,7 +73,7 @@ public class JeuDeGomokuToriqueFactory implements JeuDePlateauFactory {
     @Override
     public JeuDePlateau2D CreerPartieHumainVSMonteCarlo(ArrayList<Coup> situation) {
         JeuDePlateau2D jeu = new JeuDeGomoku();
-        JeuDeGomokuFactory fact = new JeuDeGomokuFactory();
+        JeuDeGomokuToriqueFactory fact = new JeuDeGomokuToriqueFactory();
         try {
             jeu.setPlateau(new PlateauGomokuTorique(9, 9));
             jeu.setJoueur(1, new JoueurHumain(1));
