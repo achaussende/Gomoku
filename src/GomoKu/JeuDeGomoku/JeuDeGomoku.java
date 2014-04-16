@@ -8,15 +8,9 @@ package GomoKu.JeuDeGomoku;
 import GomoKu.PlateauJeu2D.Coup;
 import GomoKu.PlateauJeu2D.ExceptionPlateauJeu2D;
 import GomoKu.PlateauJeu2D.JeuDePlateau2D;
-import GomoKu.PlateauJeu2D.JeuDePlateauFactory;
 import GomoKu.PlateauJeu2D.Joueur;
-import GomoKu.PlateauJeu2D.JoueurAleatoire;
-import GomoKu.PlateauJeu2D.JoueurHumain;
-import GomoKu.PlateauJeu2D.Plateau;
 import GomoKu.PlateauJeu2D.Position;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -25,13 +19,21 @@ import java.util.logging.Logger;
 public class JeuDeGomoku extends JeuDePlateau2D {
 
     public JeuDeGomoku() {
+        this.setJoueurs(new Joueur[2]);
     }
 
     @Override
     public boolean partieTerminee() {
         PlateauGomoku etatJeu = (PlateauGomoku) this.getPlateau();
-        Coup lastCoup = etatJeu.getHistorique().getLast();
-        Position posDernierCoup = lastCoup.getPos();
+        Coup lastCoup;
+        Position posDernierCoup;
+        try {
+            lastCoup = etatJeu.getHistorique().getLast();
+            posDernierCoup = lastCoup.getPos();
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+
         try {
             return (etatJeu.checkColonneId(posDernierCoup, lastCoup.getId(), 5)
                     || etatJeu.checkLigneId(posDernierCoup, lastCoup.getId(), 5));
@@ -44,16 +46,16 @@ public class JeuDeGomoku extends JeuDePlateau2D {
 
     @Override
     public Joueur jouerPartie() {
-        Joueur joueurCourant = null;
         while (!partieTerminee()) {
-            joueurCourant = this.getJoueurSuivant();
+            this.joueurSuivant();
             Coup c;
             do {
-                c = joueurCourant.genererCoup(this.getPlateau());
-                this.getPlateau().jouer(c);
+                c = this.getJoueurCourant().genererCoup(this.getPlateau());
             } while (!coupValide(c));
+            this.getPlateau().jouer(c);
+            System.out.println(this.getPlateau().toString(false));
         }
-        return joueurCourant;
+        return this.getJoueurCourant();
     }
 
     @Override

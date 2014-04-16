@@ -7,6 +7,7 @@ package GomoKu.PlateauJeu2D;/*
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -31,6 +32,11 @@ public class Plateau {
         return historique;
     }
 
+    public ArrayList<Coup> getSituation() {
+        ArrayList<Coup> histo = new ArrayList<>(this.getHistorique().clone());
+        return histo;
+    }
+
     public Plateau() {
     }
 
@@ -50,7 +56,7 @@ public class Plateau {
 
     public void jouer(Coup coup) {
         try {
-            etatPlateau[coup.getPos().getX()][coup.getPos().getX()] = coup.getId();
+            etatPlateau[coup.getPos().getX()][coup.getPos().getY()] = coup.getId();
             historique.add(coup);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Plateau.jouer en dehors du plateau");
@@ -91,7 +97,9 @@ public class Plateau {
     }
 
     public void annuler() {
-        this.historique.remove();
+        Coup c = this.historique.getLast();
+        etatPlateau[c.getPos().getX()][c.getPos().getY()] = 0;
+        this.historique.removeLast();
     }
 
     public int getIdPosition(Position p) throws ExceptionPlateauJeu2D {
@@ -102,7 +110,20 @@ public class Plateau {
         }
     }
 
+    /**
+     * Récupère l'identifiant du dernier joueur à avoir joué. Si personne n'a
+     * encore joué, renvoie 0.
+     *
+     * @return ID du dernier jouer à avoir joué, 0 si personne n'a encore joué
+     */
     public int getDernierId() {
-        return this.historique.getLast().getId();
+        int id = 0;
+        try {
+            id = this.historique.getLast().getId();
+        } catch (NoSuchElementException ex) {
+            System.out.println("getDernierId : Personne n'a encore joué");
+            return id;
+        }
+        return id;
     }
 }

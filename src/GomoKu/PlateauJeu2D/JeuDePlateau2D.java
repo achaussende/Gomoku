@@ -1,8 +1,4 @@
-
 package GomoKu.PlateauJeu2D;
-
-import java.util.ArrayList;
-
 
 /**
  *
@@ -11,33 +7,15 @@ import java.util.ArrayList;
 public abstract class JeuDePlateau2D {
 
     private Joueur[] joueurs;
-    private Joueur joueurSuivant;
+    private Joueur joueurCourant;
     private Plateau plateau;
+
+    public Joueur getJoueurCourant() {
+        return joueurCourant;
+    }
 
     public Plateau getPlateau() {
         return plateau;
-    }
-
-    public Joueur getJoueurSuivant() {
-        if(joueurSuivant==null){
-            return joueurs[0];
-        }else{
-            for(int i=0;i<joueurs.length;i++){
-                if(joueurs[i].equals(joueurSuivant)){
-                    if(i==joueurs.length-1){
-                        return joueurs[0];
-                    }else{
-                        return joueurs[i];
-                    }
-                }
-            }
-        }
-        return null;
-    }
-    
-    public ArrayList<Coup> getSituation() {
-        ArrayList<Coup> histo = new ArrayList<>(this.getPlateau().getHistorique().clone());
-        return histo;
     }
 
     public void setPlateau(Plateau plateau) {
@@ -51,8 +29,59 @@ public abstract class JeuDePlateau2D {
             this.joueurs[ordre - 1] = joueur;
         }
     }
-    
+
+    public void setJoueurs(Joueur[] joueurs) {
+        this.joueurs = joueurs;
+    }
+
+    /**
+     * Donne le joueur suivant au joueur courant. Si aucun joueur n'a joué
+     * encore, c'est le premier joueur dans le tableau de joueurs qui devient le
+     * joueur courant.
+     */
+    public void joueurSuivant() {
+        // Si personne n'a encore joué
+        if (plateau.getDernierId() == 0) {
+            joueurCourant = joueurs[0];
+        } else {
+            for (int i = 0; i < joueurs.length; i++) {
+                //Si le joueur dans le tableau de joueur est le dernier à avoir joué
+                if (joueurs[i].getId() == plateau.getDernierId()) {
+                    //Si ce joueur est le dernier dans le tableau de joueurs ...
+                    if (i + 1 >= joueurs.length) {
+                        //... alors c'est au tour du premier
+                        joueurCourant = joueurs[0];
+                        return;
+                    } else {
+                        // ... sinon c'est le joueur suivant
+                        joueurCourant = joueurs[i + 1];
+                        return;
+                    }
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Vérifie si la partie dans l'était où elle se trouve, est terminée
+     *
+     * @return True si terminée, false sinon
+     */
     public abstract boolean partieTerminee();
+
+    /**
+     * Vérifie si le coup spécifié est valide
+     *
+     * @param c
+     * @return True si valide, false sinon
+     */
     public abstract boolean coupValide(Coup c);
+
+    /**
+     * Lance une partie avec les paramètres courants
+     *
+     * @return Joueur vainqueur
+     */
     public abstract Joueur jouerPartie();
 }
