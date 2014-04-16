@@ -35,8 +35,7 @@ public class JeuDeGomoku extends JeuDePlateau2D {
         }
 
         try {
-            return (etatJeu.checkColonneId(posDernierCoup, lastCoup.getId(), 5)
-                    || etatJeu.checkLigneId(posDernierCoup, lastCoup.getId(), 5));
+            return (etatJeu.checkColonneId(posDernierCoup, lastCoup.getId(), 5)|| etatJeu.checkLigneId(posDernierCoup, lastCoup.getId(), 5));
         } catch (ExceptionPlateauJeu2D ex) {
             System.out.println("Erreur dans la vérification de la fin de partie : partieTerminee().");
         }

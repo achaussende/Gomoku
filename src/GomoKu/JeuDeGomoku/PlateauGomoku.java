@@ -9,7 +9,6 @@ import GomoKu.PlateauJeu2D.Plateau;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author p1105501
@@ -24,33 +23,35 @@ public class PlateauGomoku extends Plateau {
         super(longueur, largeur);
     }
 
-    public boolean checkLigneId(Position pos,int id,int n) throws ExceptionPlateauJeu2D {
-        int m=0;
-        for (int i=0;i<this.getLargeur();i++){
-            if(id == getIdPosition(new Position(i, pos.getY()))){
+    public boolean checkColonneId(Position pos, int id, int n) throws ExceptionPlateauJeu2D {
+        int m = 0;
+        int y = pos.getY();
+        for (int i = 0; i < this.getLargeur(); i++) {
+            if (id == getIdPosition(new Position(i, y))) {
                 m++;
-            }else{
-                m=0;
+                if (m >= n) {
+                    return true;
+                }
+            } else {
+                m = 0;
             }
         }
-        if(m>=n){
-            return true;
-        }
-        else{ return false;}
+        return false;
     }
 
-    public boolean checkColonneId(Position pos,int id,int n) throws ExceptionPlateauJeu2D {
-        int m=0;
-        for (int i=0;i<this.getLongueur();i++){
-            if(id == getIdPosition(new Position(pos.getY(),i))){
+    public boolean checkLigneId(Position pos, int id, int n) throws ExceptionPlateauJeu2D {
+        int m = 0;
+        int x = pos.getX();
+        for (int i = 0; i < this.getLongueur(); i++) {
+            if (id == getIdPosition(new Position(x, i))) {
                 m++;
-            }else{
-                m=0;
+                if (m >= n) {
+                    return true;
+                }
+            } else {
+                m = 0;
             }
         }
-        if(m>=n){
-            return true;
-        }
-        else{ return false;}
+        return false;
     }
 }
