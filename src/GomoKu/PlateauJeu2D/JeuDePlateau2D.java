@@ -1,27 +1,51 @@
 package GomoKu.PlateauJeu2D;
 
 /**
- *
+ * Class Abstraite définissant un Jeu de Plateau 2D
  * @author Antoine
  */
 public abstract class JeuDePlateau2D {
-
+    /**
+     * Tableau de Joueurs
+     */
     private Joueur[] joueurs;
+    /**
+     * Joueur Courant
+     */
     private Joueur joueurCourant;
+    /**
+     * Plateau de Jeu
+     */
     private Plateau plateau;
 
+    /**
+     * Getter de joueurCourant
+     * @return joueurCourant
+     */
     public Joueur getJoueurCourant() {
         return joueurCourant;
     }
-
+    /**
+     * Getter de Plateau
+     * @return plateau
+     */
     public Plateau getPlateau() {
         return plateau;
     }
-
+    
+    /**
+     * Setter du Plateau
+     * @param plateau 
+     */
     public void setPlateau(Plateau plateau) {
         this.plateau = plateau;
     }
-
+    /**
+     * Setter d'un ieme joueur dans le tableau de Joueur
+     * @param ordre index dans le tableau de Joueurs
+     * @param joueur un Joueur
+     * @throws ExceptionPlateauJeu2D Exception si le joueur est setté en dehors du tableau de Joueurs
+     */
     public void setJoueur(int ordre, Joueur joueur) throws ExceptionPlateauJeu2D {
         if (ordre - 1 < 0 || ordre - 1 > joueurs.length) {
             throw new ExceptionPlateauJeu2D("Indice de Joueur en dehors du tableau");
@@ -29,7 +53,10 @@ public abstract class JeuDePlateau2D {
             this.joueurs[ordre - 1] = joueur;
         }
     }
-
+    /**
+     * Setter du Tableau de Joueurs
+     * @param joueurs un tableau de Joueurs
+     */
     public void setJoueurs(Joueur[] joueurs) {
         this.joueurs = joueurs;
     }
