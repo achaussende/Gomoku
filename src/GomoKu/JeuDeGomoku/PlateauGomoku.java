@@ -26,7 +26,8 @@ public class PlateauGomoku extends Plateau {
     public boolean checkColonneId(Position pos, int id, int n) throws ExceptionPlateauJeu2D {
         int m = 0;
         int y = pos.getY();
-        for (int i = 0; i < this.getLargeur(); i++) {
+        int indiceStop = this.getLargeur() - n;
+        for (int i = 0; ((i < this.getLargeur()) || (i >= indiceStop && m == 0)); i++) {
             if (id == getIdPosition(new Position(i, y))) {
                 m++;
                 if (m >= n) {
@@ -42,7 +43,8 @@ public class PlateauGomoku extends Plateau {
     public boolean checkLigneId(Position pos, int id, int n) throws ExceptionPlateauJeu2D {
         int m = 0;
         int x = pos.getX();
-        for (int i = 0; i < this.getLongueur(); i++) {
+        int indiceStop = this.getLongueur()- n;
+        for (int i = 0; ((i < this.getLongueur()) || (i >= indiceStop && m == 0)); i++) {
             if (id == getIdPosition(new Position(x, i))) {
                 m++;
                 if (m >= n) {
