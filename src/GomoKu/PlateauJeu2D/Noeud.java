@@ -2,7 +2,7 @@ package GomoKu.PlateauJeu2D;
 
 /**
  *
- * @author Antoine
+ * @author Antoine CARON
  */
 public class Noeud {
 
@@ -32,7 +32,7 @@ public class Noeud {
      * nombre de simulations effectuées
      */
     public double getMoyenne() {
-        return 100 * nbVictoire / nbSimulation;
+        return (double) 100 * (double) nbVictoire / (double) nbSimulation;
     }
 
 }

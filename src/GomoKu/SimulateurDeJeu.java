@@ -32,15 +32,14 @@ public class SimulateurDeJeu {
          {0, 0, 0, 0, 0, 0, 0, 0, 0}
          };
          */
-
-        // Situation de jeu Aléatoire VS Aléatoire
-        JeuDeGomokuFactory launcher = new JeuDeGomokuFactory();
-        JeuDePlateau2D jeu = launcher.CreerPartieAleatoireVSAleatoire(null);
-        System.out.println(jeu.getPlateau().toString(false));
-        Joueur vainqueur = jeu.jouerPartie();
-        System.out.println(jeu.getPlateau().toString(false));
-        System.out.println("Le joueur vainqueur est le joueur : " + vainqueur.getId());
-
+        /*
+         // Situation de jeu Aléatoire VS Aléatoire
+         JeuDeGomokuFactory launcher = new JeuDeGomokuFactory();
+         JeuDePlateau2D jeu = launcher.CreerPartieAleatoireVSAleatoire(null);
+         System.out.println(jeu.getPlateau().toString(false));
+         Joueur vainqueur = jeu.jouerPartie();
+         System.out.println(jeu.getPlateau().toString(false));
+         */
         /*
          //Situation : on joue un coup
          JeuDePlateau2D jeu = new JeuDeGomoku();
@@ -57,5 +56,25 @@ public class SimulateurDeJeu {
          c = jeu.getJoueurCourant().genererCoup(jeu.getPlateau());
          jeu.getPlateau().jouer(c);
          System.out.println(jeu.getPlateau().toString(false));*/
+
+        //Situation de jeu Humain VS MonteCarlo
+        JeuDeGomokuFactory launcher = new JeuDeGomokuFactory();
+        int[][] ex_situation = {
+            {0, 0, 2, 0, 0, 0, 0, 0, 0},
+            {0, 0, 2, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 2, 0, 0, 0},
+            {0, 0, 0, 0, 1, 1, 1, 1, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 2, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0}
+        };
+        JeuDePlateau2D jeu = launcher.CreerPartieHumainVSMonteCarlo(null);
+        System.out.println(jeu.getPlateau().toString(false));
+        Joueur vainqueur = jeu.jouerPartie(true);
+        System.out.println(jeu.getPlateau().toString(false));
+        System.out.println("Le joueur vainqueur est le joueur : " + vainqueur.getId());
+
     }
 }

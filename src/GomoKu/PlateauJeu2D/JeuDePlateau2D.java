@@ -108,7 +108,9 @@ public abstract class JeuDePlateau2D {
     /**
      * Lance une partie avec les paramètres courants
      *
+     * @param affichGrille True pour afficher la grille lorsqu'on joue la partie. False sinon
+     * (L'intérêt est pour afficher ou non lors des simulations de l'IA Monte Carlo
      * @return Joueur vainqueur
      */
-    public abstract Joueur jouerPartie();
+    public abstract Joueur jouerPartie(boolean affichGrille);
 }

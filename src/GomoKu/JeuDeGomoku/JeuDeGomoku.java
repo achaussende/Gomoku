@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GomoKu.JeuDeGomoku;
 
 import GomoKu.PlateauJeu2D.Coup;
@@ -14,7 +9,7 @@ import java.util.NoSuchElementException;
 
 /**
  *
- * @author Antoine
+ * @author Antoine CARON
  */
 public class JeuDeGomoku extends JeuDePlateau2D {
 
@@ -34,17 +29,13 @@ public class JeuDeGomoku extends JeuDePlateau2D {
             return false;
         }
 
-        try {
-            return (etatJeu.checkColonneId(posDernierCoup, lastCoup.getId(), 5)|| etatJeu.checkLigneId(posDernierCoup, lastCoup.getId(), 5));
-        } catch (ExceptionPlateauJeu2D ex) {
-            System.out.println("Erreur dans la vérification de la fin de partie : partieTerminee().");
-        }
-        return false;
-
+        return (etatJeu.checkColonneId(posDernierCoup, lastCoup.getId(), 5)
+                || etatJeu.checkLigneId(posDernierCoup, lastCoup.getId(), 5)
+                || this.getPlateau().isFull());
     }
 
     @Override
-    public Joueur jouerPartie() {
+    public Joueur jouerPartie(boolean affichGrille) {
         while (!partieTerminee()) {
             this.joueurSuivant();
             Coup c;
@@ -52,9 +43,16 @@ public class JeuDeGomoku extends JeuDePlateau2D {
                 c = this.getJoueurCourant().genererCoup(this.getPlateau());
             } while (!coupValide(c));
             this.getPlateau().jouer(c);
-            System.out.println(this.getPlateau().toString(false));
+            if (affichGrille) {
+                System.out.println(this.getPlateau().toString(false));
+            }
         }
-        return this.getJoueurCourant();
+        if (this.getPlateau().isFull()) {
+            return null;
+        } else {
+            return this.getJoueurCourant();
+        }
+
     }
 
     @Override

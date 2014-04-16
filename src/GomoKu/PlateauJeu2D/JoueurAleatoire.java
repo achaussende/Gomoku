@@ -1,9 +1,10 @@
-
 package GomoKu.PlateauJeu2D;
+
+import java.util.ArrayList;
 
 /**
  *
- * @author Adrien
+ * @author Adrien CHAUSSENDE
  */
 public class JoueurAleatoire extends Joueur {
 
@@ -13,9 +14,13 @@ public class JoueurAleatoire extends Joueur {
 
     @Override
     public Coup genererCoup(Plateau etatJeu) {
-        Position pos = new Position(Utilitaire.monRandom(0, etatJeu.getLongueur()-1),Utilitaire.monRandom(0, etatJeu.getLargeur()-1));
-        System.out.println("Le joueur aléatoire " + this.getId() + "joue dans la case : [" + pos.getX() + "," + pos.getY() + "]");
-        return new Coup(this.getId(),pos);
+
+        ArrayList<Position> posPossibles = etatJeu.getPositionsParId(0);
+        if (posPossibles.isEmpty()) {
+            return null;
+        }
+        Position pos = posPossibles.get(Utilitaire.monRandom(0, posPossibles.size() - 1));
+        return new Coup(this.getId(), pos);
     }
-    
+
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GomoKu.JeuDeGomoku;
 
 import GomoKu.PlateauJeu2D.Coup;
@@ -16,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Antoine
+ * @author Antoine CARON
  */
 public class JeuDeGomokuFactory implements JeuDePlateauFactory {
 
@@ -69,20 +64,20 @@ public class JeuDeGomokuFactory implements JeuDePlateauFactory {
             for (Coup c : situation) {
                 jeu.getPlateau().jouer(c);
             }
-        }            
+        }
 
         jeu.joueurSuivant();
         return jeu;
     }
-    
+
     @Override
     public JeuDePlateau2D CreerPartieHumainVSMonteCarlo(ArrayList<Coup> situation) {
         JeuDePlateau2D jeu = new JeuDeGomoku();
-        JeuDeGomokuFactory fact=new JeuDeGomokuFactory();
+        JeuDeGomokuFactory fact = new JeuDeGomokuFactory();
         try {
             jeu.setPlateau(new PlateauGomoku(9, 9));
-            jeu.setJoueur(1, new JoueurAleatoire(1));
-            jeu.setJoueur(2, new JoueurMonteCarlo(2,10000,fact));
+            jeu.setJoueur(1, new JoueurHumain(1));
+            jeu.setJoueur(2, new JoueurMonteCarlo(2, 10000, fact));
         } catch (ExceptionPlateauJeu2D ex) {
             System.out.println(ex.getMess_err());
         }
@@ -90,9 +85,11 @@ public class JeuDeGomokuFactory implements JeuDePlateauFactory {
             for (Coup c : situation) {
                 jeu.getPlateau().jouer(c);
             }
-        }            
+        }
 
         jeu.joueurSuivant();
         return jeu;
     }
+
+
 }

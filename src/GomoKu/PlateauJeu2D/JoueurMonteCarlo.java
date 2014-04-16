@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 /**
  * IA dont la décision est prise suivant une approche de Monte Carlo
- * @author Adrien
+ *
+ * @author Adrien CHAUSSENDE
  */
 public class JoueurMonteCarlo extends Joueur {
 
@@ -20,29 +21,33 @@ public class JoueurMonteCarlo extends Joueur {
         this.jeuFactory = jeuFactory;
         this.nbSimulations = nbSimulations;
     }
+
     /**
-     * Effectue des simulations suivant les approches de Monte Carlo,
-     * pour chaque coup possibles sur l'etat du jeu actuel
-     * afin de renvoyer le meilleur coup à jouer
-     * @param etatJeu : Plateau actuel de jeu sur lequel 
-     * les simulations et le coup à jouer seront générés
+     * Effectue des simulations suivant les approches de Monte Carlo, pour
+     * chaque coup possibles sur l'etat du jeu actuel afin de renvoyer le
+     * meilleur coup à jouer
+     *
+     * @param etatJeu : Plateau actuel de jeu sur lequel les simulations et le
+     * coup à jouer seront générés
      * @return Meilleur coup à jouer
      */
     @Override
     public Coup genererCoup(Plateau etatJeu) {
         Noeud meilleurCoup = null;
-        ArrayList<Position> positionsPossibles = etatJeu.etatId(0);
+        ArrayList<Position> positionsPossibles = etatJeu.getPositionsParId(0);
         for (Position p : positionsPossibles) {
             Coup cCourant = new Coup(this.getId(), p);
             Noeud nCourant = new Noeud(cCourant);
             etatJeu.jouer(cCourant);
             ArrayList<Coup> sit = etatJeu.getSituation();
             for (int i = 0; i < nbSimulations; i++) {
-                Joueur gagnant = jeuFactory.CreerPartieAleatoireVSAleatoire(sit).jouerPartie();
-                if (gagnant.getId() == this.getId()) {
-                    nCourant.ajouterVictoire();
-                } else {
-                    nCourant.ajouterDefaite();
+                Joueur gagnant = jeuFactory.CreerPartieAleatoireVSAleatoire(sit).jouerPartie(false);
+                if (gagnant != null) {
+                    if (gagnant.getId() == this.getId()) {
+                        nCourant.ajouterVictoire();
+                    } else {
+                        nCourant.ajouterDefaite();
+                    }
                 }
             }
             if (meilleurCoup == null || meilleurCoup.getMoyenne() < nCourant.getMoyenne()) {

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GomoKu.JeuDeGomoku;
 
 import GomoKu.PlateauJeu2D.ExceptionPlateauJeu2D;
@@ -23,7 +17,7 @@ public class PlateauGomokuTorique extends PlateauGomoku {
     }
     
     @Override
-    public boolean checkColonneId(Position pos, int id, int n) throws ExceptionPlateauJeu2D{
+    public boolean checkColonneId(Position pos, int id, int n){
         int m = 0;
         int y = pos.getY();
         for (int i = 0; i < this.getLargeur(); i++) {
@@ -34,19 +28,23 @@ public class PlateauGomokuTorique extends PlateauGomoku {
                 }else{
                     indice=i+j;
                 }
-                if (id == getIdPosition(new Position(indice, y))) {
-                m++;
-                if (m >= n) {
-                    return true;
+                try {
+                    if (id == getIdPosition(new Position(indice, y))) {
+                        m++;
+                        if (m >= n) {
+                            return true;
+                        }
+                    } else {
+                        m = 0;
+                    }   } catch (ExceptionPlateauJeu2D ex) {
+                    System.out.println("checkColonneId --> index en dehors de la grille");
                 }
-            } else {
-                m = 0;
-            }
             } 
         }
         return false;
     } 
-    public boolean checkLigneId(Position pos, int id, int n) throws ExceptionPlateauJeu2D{
+    @Override
+    public boolean checkLigneId(Position pos, int id, int n){
         int m = 0;
         int x = pos.getX();
         int indiceStop = this.getLongueur()- n;
@@ -58,14 +56,17 @@ public class PlateauGomokuTorique extends PlateauGomoku {
                 }else{
                     indice=i+j;
                 }
-                if (id == getIdPosition(new Position(x, indice))) {
-                m++;
-                if (m >= n) {
-                    return true;
+                try {
+                    if (id == getIdPosition(new Position(x, indice))) {
+                        m++;
+                        if (m >= n) {
+                            return true;
+                        }
+                    } else {
+                        m = 0;
+                    }   } catch (ExceptionPlateauJeu2D ex) {
+                    System.out.println("checkLigneId --> index en dehors de la grille");
                 }
-            } else {
-                m = 0;
-            }
             } 
         }
         return false;
