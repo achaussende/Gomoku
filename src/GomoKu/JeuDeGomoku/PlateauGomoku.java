@@ -3,10 +3,9 @@ package GomoKu.JeuDeGomoku;
 import GomoKu.PlateauJeu2D.ExceptionPlateauJeu2D;
 import GomoKu.PlateauJeu2D.Plateau;
 import GomoKu.PlateauJeu2D.Position;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
+ * Plateau de Gomoku. Héritage de Plateau
  *
  * @author Adrien CHAUSSENDE
  */
@@ -42,7 +41,7 @@ public class PlateauGomoku extends Plateau {
      * @throws ExceptionPlateauJeu2D
      */
     @Override
-    public boolean checkColonneId(Position pos, int id, int n){
+    public boolean checkColonneId(Position pos, int id, int n) {
         int m = 0;
         int y = pos.getY();
         int indiceStop = this.getLargeur() + 1 - n;
@@ -76,7 +75,7 @@ public class PlateauGomoku extends Plateau {
      * @throws ExceptionPlateauJeu2D
      */
     @Override
-    public boolean checkLigneId(Position pos, int id, int n){
+    public boolean checkLigneId(Position pos, int id, int n) {
         int m = 0;
         int x = pos.getX();
         int indiceStop = this.getLongueur() + 1 - n;

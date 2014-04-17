@@ -9,13 +9,33 @@ import java.util.ArrayList;
  */
 public class JoueurMonteCarlo extends Joueur {
 
+    /**
+     * Factory pour que l'IA puisse réaliser ses simulations
+     */
     private JeuDePlateauFactory jeuFactory;
+    /**
+     * Nombre de simulations à effectuer
+     */
     private int nbSimulations;
 
+    /**
+     * Constructeur de JoueurMonteCarlo en passant son identifiant durant cette
+     * partie
+     *
+     * @param id Identifiant
+     */
     public JoueurMonteCarlo(int id) {
         super(id);
     }
 
+    /**
+     * Constructeur de JoueurMontecarlo en passant son identifiant, le nombre de
+     * simulations à effectuer et la factory pour ses simulations
+     *
+     * @param id Identifiant
+     * @param nbSimulations Nombre de simulations
+     * @param jeuFactory Factory de jeu de plateau pour le simulations de l'IA
+     */
     public JoueurMonteCarlo(int id, int nbSimulations, JeuDePlateauFactory jeuFactory) {
         super(id);
         this.jeuFactory = jeuFactory;
@@ -35,6 +55,7 @@ public class JoueurMonteCarlo extends Joueur {
     public Coup genererCoup(Plateau etatJeu) {
         Noeud meilleurCoup = null;
         ArrayList<Position> positionsPossibles = etatJeu.getPositionsParId(0);
+        System.out.println("MonteCarlo : C'est à mon tour, laissez moi réfléchir.");
         for (Position p : positionsPossibles) {
             Coup cCourant = new Coup(this.getId(), p);
             Noeud nCourant = new Noeud(cCourant);
@@ -55,6 +76,7 @@ public class JoueurMonteCarlo extends Joueur {
             }
             etatJeu.annuler();
         }
+        System.out.println("J'ai trouvé !");
         return meilleurCoup.getCoup();
     }
 

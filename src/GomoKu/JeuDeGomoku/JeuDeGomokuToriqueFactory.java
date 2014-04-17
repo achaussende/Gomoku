@@ -10,6 +10,8 @@ import GomoKu.PlateauJeu2D.JoueurMonteCarlo;
 import java.util.ArrayList;
 
 /**
+ * Factory pour créer des parties entre adversaires différents sur un Gomoku à
+ * plateau torique
  *
  * @author Adrien CHAUSSENDE
  */

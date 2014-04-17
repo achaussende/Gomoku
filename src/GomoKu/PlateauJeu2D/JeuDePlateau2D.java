@@ -2,9 +2,11 @@ package GomoKu.PlateauJeu2D;
 
 /**
  * Class Abstraite définissant un Jeu de Plateau 2D
+ *
  * @author Antoine
  */
 public abstract class JeuDePlateau2D {
+
     /**
      * Tableau de Joueurs
      */
@@ -20,31 +22,38 @@ public abstract class JeuDePlateau2D {
 
     /**
      * Getter de joueurCourant
+     *
      * @return joueurCourant
      */
     public Joueur getJoueurCourant() {
         return joueurCourant;
     }
+
     /**
      * Getter de Plateau
+     *
      * @return plateau
      */
     public Plateau getPlateau() {
         return plateau;
     }
-    
+
     /**
      * Setter du Plateau
-     * @param plateau 
+     *
+     * @param plateau
      */
     public void setPlateau(Plateau plateau) {
         this.plateau = plateau;
     }
+
     /**
      * Setter d'un ieme joueur dans le tableau de Joueur
+     *
      * @param ordre index dans le tableau de Joueurs
      * @param joueur un Joueur
-     * @throws ExceptionPlateauJeu2D Exception si le joueur est setté en dehors du tableau de Joueurs
+     * @throws ExceptionPlateauJeu2D Exception si le joueur est setté en dehors
+     * du tableau de Joueurs
      */
     public void setJoueur(int ordre, Joueur joueur) throws ExceptionPlateauJeu2D {
         if (ordre - 1 < 0 || ordre - 1 > joueurs.length) {
@@ -53,8 +62,10 @@ public abstract class JeuDePlateau2D {
             this.joueurs[ordre - 1] = joueur;
         }
     }
+
     /**
      * Setter du Tableau de Joueurs
+     *
      * @param joueurs un tableau de Joueurs
      */
     public void setJoueurs(Joueur[] joueurs) {
@@ -108,8 +119,9 @@ public abstract class JeuDePlateau2D {
     /**
      * Lance une partie avec les paramètres courants
      *
-     * @param affichGrille True pour afficher la grille lorsqu'on joue la partie. False sinon
-     * (L'intérêt est pour afficher ou non lors des simulations de l'IA Monte Carlo
+     * @param affichGrille True pour afficher la grille lorsqu'on joue la
+     * partie. False sinon (L'intérêt est pour afficher ou non lors des
+     * simulations de l'IA Monte Carlo
      * @return Joueur vainqueur
      */
     public abstract Joueur jouerPartie(boolean affichGrille);

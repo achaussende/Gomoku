@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
+ * Classe abstraite de définition d'un plateau de jeu en 2D
  *
  * @author Antoine CARON
  */
@@ -176,7 +177,7 @@ public abstract class Plateau {
         try {
             id = this.historique.getLast().getId();
         } catch (NoSuchElementException ex) {
-            System.out.println("getDernierId : Personne n'a encore joué");
+            System.out.println("getDernierId() --> Personne n'a encore joué");
             return id;
         }
         return id;
