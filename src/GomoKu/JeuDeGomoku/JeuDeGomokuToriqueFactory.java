@@ -30,8 +30,6 @@ public class JeuDeGomokuToriqueFactory implements JeuDePlateauFactory {
         for (Coup c : situation) {
             jeu.getPlateau().jouer(c);
         }
-
-        jeu.joueurSuivant();
         return jeu;
     }
 
@@ -48,7 +46,6 @@ public class JeuDeGomokuToriqueFactory implements JeuDePlateauFactory {
         for (Coup c : situation) {
             jeu.getPlateau().jouer(c);
         }
-        jeu.joueurSuivant();
         return jeu;
     }
 
@@ -68,7 +65,6 @@ public class JeuDeGomokuToriqueFactory implements JeuDePlateauFactory {
             }
         }
 
-        jeu.joueurSuivant();
         return jeu;
     }
 
@@ -88,7 +84,6 @@ public class JeuDeGomokuToriqueFactory implements JeuDePlateauFactory {
                 jeu.getPlateau().jouer(c);
             }
         }
-        jeu.joueurSuivant();
         return jeu;
     }
 }
